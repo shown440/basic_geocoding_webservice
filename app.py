@@ -20,7 +20,7 @@ def data_show():
         # print(r.json())
         r = requests.get(my_api)
         myRespond = r.json()
-        print(myRespond)
+        #print(myRespond)
         return render_template("index.html", myRespond=myRespond)
         # except Exception as e:
         #     return render_template("index.html")
