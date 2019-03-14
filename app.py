@@ -1,12 +1,29 @@
 from flask import Flask, render_template, request, send_file
 from geopy.geocoders import Nominatim
 import pandas
+import requests
 
 app = Flask(__name__)
 
 @app.route("/") # only "/"= Home page
 def index():
     return render_template("index.html")
+
+@app.route("/data-show", methods=['POST']) # only "/"= Home page
+def data_show():
+
+    if request.method=="POST":
+        #try:
+        my_api = request.form["url1"]
+        #print(str(my_api))
+        # r = requests.get('http://dummy.restapiexample.com/api/v1/employees')
+        # print(r.json())
+        r = requests.get(my_api)
+        myRespond = r.json()
+        print(myRespond)
+        return render_template("index.html", myRespond=myRespond)
+        # except Exception as e:
+        #     return render_template("index.html")
 
 @app.route("/success-table", methods=["POST"])
 def success_table():
